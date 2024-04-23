@@ -23,4 +23,5 @@ class ColorPallet {
   static const backgroundColor = Color(0xFF09141A);
   static const commonColor = Color(0xFFFFFFFF);
   static const emptyContainerColor = Color(0xFF162329);
+  static const emptyContainerColor1 = Color(0xFF0E191F);
 }

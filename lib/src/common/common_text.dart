@@ -35,6 +35,7 @@ class CommonText extends StatelessWidget {
           style: TextStyle(
             fontFamily: fonts,
             decoration: textDecoration,
+            decorationColor: decorationColor,
             fontSize: fontSize + 0.002.sh,
             color: color,
             fontWeight: fontWeight,

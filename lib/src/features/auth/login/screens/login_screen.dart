@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:youapp_coding_test/src/common/common_scaffold_background.dart';
 import 'package:youapp_coding_test/src/common/common_text.dart';
 import 'package:youapp_coding_test/src/config/themes/color_pallet.dart';
-import 'package:youapp_coding_test/src/config/utils/assets/svg_assets.dart';
+import 'package:youapp_coding_test/src/config/assets/svg_assets.dart';
+import 'package:youapp_coding_test/src/features/auth/login/bloc/login_event.dart';
 
 import '../../../../common/common_appbar.dart';
 import '../../../../common/common_button.dart';
 import '../../../../common/common_textfield.dart';
+import '../../../../config/utils/snackbar.dart';
+import '../bloc/login_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+  final TextEditingController emailUsername = TextEditingController();
+  final TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final loginBloc = BlocProvider.of<LoginBloc>(context);
     return Scaffold(
         body: CommonScaffoldBackground(
       widget: Column(
@@ -35,22 +43,57 @@ class LoginScreen extends StatelessWidget {
           SizedBox(
             height: 0.02.sh,
           ),
-          const CommonTextField(
+          CommonTextField(
             hintText: 'Enter Username/Email',
+            controller: emailUsername,
           ),
           SizedBox(
             height: 0.02.sh,
           ),
-          const CommonTextField(
+          CommonTextField(
             isObscureButton: true,
             hintText: 'Enter Password',
+            controller: password,
           ),
           SizedBox(
             height: 0.03.sh,
           ),
-          CommonButton(
-            onTap: () {},
-            text: 'Login',
+          BlocConsumer<LoginBloc, LoginState>(
+            builder: (context, state) {
+              // TODO: implement listener
+              if (state is LoginLoadingState) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (state is LoginFailureState) {
+                print('Api Fetching is Failed');
+                // CustomSnackbar.show(context, 'Faied to Login, Plese Try Again');
+              }
+              if (state is LoginSuccessState) {
+                print('Api Fetched Successfullly!');
+                // CustomSnackbar.show(context, 'Faied to Login, Plese Try Again');
+              }
+
+              return CommonButton(
+                onTap: () {
+                  loginBloc.add(LoginButtonPressedEvent(
+                      email: emailUsername.text,
+                      password: password.text,
+                      username: emailUsername.text));
+                },
+                text: 'Login',
+              );
+            },
+            listener: (context, state) {
+              if (state is LoginLoadingState) {
+                Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: ColorPallet.lgbb2,
+                  ),
+                );
+              }
+            },
           ),
           SizedBox(
             height: 0.1.sh,

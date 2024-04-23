@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'YouApp Coding Test App',
-            home: ProfileScreen(),
+            home: LoginScreen(),
           )),
     );
   }

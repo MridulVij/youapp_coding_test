@@ -1,9 +1,8 @@
 class LoginEvent {}
 
-class LoginInitialEvent extends LoginEvent {
-  final String username;
-  final String email;
-  final String password;
-  LoginInitialEvent(
-      {required this.username, required this.email, required this.password});
+class LoginButtonPressedEvent extends LoginEvent {
+  final String? email;
+  final String? password;
+  final String? username;
+  LoginButtonPressedEvent({this.email, this.password, this.username});
 }

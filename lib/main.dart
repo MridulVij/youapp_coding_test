@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'src/features/auth/login/screens/login_screen.dart';
 
@@ -12,10 +13,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'YouApp Coding Test App',
-      home: LoginScreen(),
+    final size = MediaQuery.of(context).size;
+    return ScreenUtilInit(
+      designSize: Size(size.height, size.width),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'YouApp Coding Test App',
+        home: LoginScreen(),
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:youapp_coding_test/src/config/themes/color_pallet.dart';
 
 class CommonTextField extends StatelessWidget {
   final String hintText;
@@ -20,16 +21,29 @@ class CommonTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      obscureText: obscureText,
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: TextStyle(fontFamily: 'Inter', fontSize: 0.015.sh),
-        suffixIcon: suffixIcon,
-        contentPadding: EdgeInsets.symmetric(
-          vertical: contentPaddingVertical ?? 0.018.sh,
-          horizontal: contentPaddinghorizontal ?? 0.04.sw,
+    return Container(
+      decoration: BoxDecoration(
+          color: ColorPallet.commonColor.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(8)),
+      padding: EdgeInsets.only(bottom: 0.009.sw),
+      child: Center(
+        child: TextFormField(
+          cursorColor: ColorPallet.commonColor,
+          controller: controller,
+          obscureText: obscureText,
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: hintText,
+            hintStyle: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 0.015.sh,
+                color: ColorPallet.commonColor.withOpacity(0.2)),
+            suffixIcon: suffixIcon,
+            contentPadding: EdgeInsets.symmetric(
+              // vertical: contentPaddingVertical ?? 0.01.sh,
+              horizontal: contentPaddinghorizontal ?? 0.04.sw,
+            ),
+          ),
         ),
       ),
     );

@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:youapp_coding_test/src/config/routes/route_names.dart';
 import 'package:youapp_coding_test/src/features/auth/login/bloc/login_bloc.dart';
 import 'package:youapp_coding_test/src/features/auth/register/bloc/register_bloc.dart';
-
-import 'src/config/routes/routes.dart';
-import 'src/features/auth/login/screens/login_screen.dart';
-import 'src/features/auth/register/screens/register_screen.dart';
-import 'src/features/profile/screens/profile_screen.dart';
+import 'src/features/about/screens/about_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +30,7 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'YouApp Coding Test App',
-            home: ProfileScreen(),
+            home: AboutScreen(),
             // initialRoute: RouteNames.register,
             // onGenerateRoute: Routes.generateRoute,
           )),

@@ -9,8 +9,8 @@ import '../../../common/common_text.dart';
 import '../widgets/custom_about_field.dart';
 import '../widgets/custom_chip.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({super.key});
+class AboutScreen extends StatelessWidget {
+  AboutScreen({super.key});
   String name = 'Jhondoe';
   File? image;
   @override

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:youapp_coding_test/src/config/routes/route_names.dart';
 import 'package:youapp_coding_test/src/features/auth/login/screens/login_screen.dart';
 import 'package:youapp_coding_test/src/features/auth/register/screens/register_screen.dart';
-import 'package:youapp_coding_test/src/features/profile/screens/profile_screen.dart';
+import 'package:youapp_coding_test/src/features/about/screens/about_screen.dart';
 
 import '../../features/home/home_screen.dart';
 
@@ -28,8 +28,8 @@ class Routes {
             return LoginScreen();
           case RouteNames.register:
             return RegisterScreen();
-          case RouteNames.profile:
-            return ProfileScreen();
+          case RouteNames.about:
+            return AboutScreen();
           case RouteNames.about:
           case RouteNames.interest:
           case RouteNames.home:

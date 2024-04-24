@@ -1,4 +1,11 @@
 part of 'register_bloc.dart';
 
-@immutable
-sealed class RegisterEvent {}
+class RegisterEvent {}
+
+class RegisterButtonClickedEvent extends RegisterEvent {
+  final String email;
+  final String username;
+  final String password;
+  RegisterButtonClickedEvent(
+      {required this.email, required this.username, required this.password});
+}

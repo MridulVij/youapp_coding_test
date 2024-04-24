@@ -2,13 +2,10 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:youapp_coding_test/src/config/themes/color_pallet.dart';
 import 'package:youapp_coding_test/src/config/assets/svg_assets.dart';
-
 import '../../../common/common_appbar.dart';
 import '../../../common/common_text.dart';
-import '../../auth/register/widgets/golden_gradient.dart';
 import '../widgets/custom_about_field.dart';
 import '../widgets/custom_chip.dart';
 

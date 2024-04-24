@@ -34,20 +34,25 @@ class CommonAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.arrow_back_ios_rounded,
-              color: ColorPallet.commonColor,
-            ),
-            CommonText(
-              text: 'Back',
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-            ),
-          ],
+        InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.arrow_back_ios_rounded,
+                color: ColorPallet.commonColor,
+              ),
+              CommonText(
+                text: 'Back',
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ],
+          ),
         ),
         Row(
           // mainAxisAlignment: MainAxisAlignment.center,

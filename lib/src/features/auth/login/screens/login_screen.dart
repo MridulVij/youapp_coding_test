@@ -11,6 +11,7 @@ import 'package:youapp_coding_test/src/features/auth/login/bloc/login_event.dart
 import '../../../../common/common_appbar.dart';
 import '../../../../common/common_button.dart';
 import '../../../../common/common_textfield.dart';
+import '../../../../config/routes/route_names.dart';
 import '../../../../config/utils/snackbar.dart';
 import '../bloc/login_bloc.dart';
 
@@ -63,16 +64,10 @@ class LoginScreen extends StatelessWidget {
               // TODO: implement listener
               if (state is LoginLoadingState) {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: ColorPallet.lgbb2,
+                  ),
                 );
-              }
-              if (state is LoginFailureState) {
-                print('Api Fetching is Failed');
-                // CustomSnackbar.show(context, 'Faied to Login, Plese Try Again');
-              }
-              if (state is LoginSuccessState) {
-                print('Api Fetched Successfullly!');
-                // CustomSnackbar.show(context, 'Faied to Login, Plese Try Again');
               }
 
               return CommonButton(
@@ -86,12 +81,19 @@ class LoginScreen extends StatelessWidget {
               );
             },
             listener: (context, state) {
-              if (state is LoginLoadingState) {
-                Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: ColorPallet.lgbb2,
-                  ),
-                );
+              if (state is LoginSuccessState) {
+                print('Api Fetched Successfullly!');
+                Duration(seconds: 3);
+                Navigator.pushNamed(context, RouteNames.home);
+              }
+              if (state is LoginSuccessState) {
+                CustomSnackbar.show(
+                    context, 'Welcome, Logged in Successfully!');
+              }
+              if (state is LoginFailureState) {
+                print('Api Fetching is Failed');
+                CustomSnackbar.show(
+                    context, 'Failed to Login, Please Try Again!');
               }
             },
           ),
@@ -101,6 +103,7 @@ class LoginScreen extends StatelessWidget {
           InkWell(
             onTap: () {
               print('tapped');
+              Navigator.pushNamed(context, RouteNames.register);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

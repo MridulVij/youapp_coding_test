@@ -23,7 +23,7 @@ class AboutScreen extends StatefulWidget {
 class _AboutScreenState extends State<AboutScreen> {
   String name = 'Jhondoe';
 
-  bool isAboutShow = false;
+  bool isAboutShow = true;
   File? image;
 
   void selectImage() async {
@@ -134,19 +134,34 @@ class _AboutScreenState extends State<AboutScreen> {
                       },
                       title: 'About',
                     )
-                  : CustomAboutFieldNotEmpty(
-                      image: image,
-                      selectImage: selectImage,
-                      onClick: () {
-                        setState(() {
-                          isAboutShow = !isAboutShow;
-                        });
+                  : BlocConsumer<AboutBloc, AboutState>(
+                      listener: (context, state) {
+                        // TODO: implement listener
                       },
-                      title: 'About',
+                      builder: (context, state) {
+                        if (state
+                            is AboutLoadingStateAfterClickingSaveAndEditButton) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return CustomAboutFieldNotEmpty(
+                          image: image,
+                          selectImage: selectImage,
+                          onClick: () {
+                            setState(() {
+                              isAboutShow = !isAboutShow;
+                            });
+                          },
+                          title: 'About',
+                        );
+                      },
                     ),
+              //
               SizedBox(
                 height: 0.02.sh,
               ),
+              //
               CustomAboutFieldEmpty(
                 onClick: () {
                   Navigator.pushNamed(context, RouteNames.interest);

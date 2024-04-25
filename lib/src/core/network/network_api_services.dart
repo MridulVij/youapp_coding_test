@@ -60,6 +60,33 @@ class NetworkApiServices extends BaseApiServices {
     return responseJson;
   }
 
+  // put api
+  Future<dynamic> putHeaderApi(
+      {required Map<String, String>? header,
+      required Object? data,
+      required String url}) async {
+    if (kDebugMode) {
+      print(url);
+      print(data);
+    }
+    dynamic responseJson;
+    final String jsonString = jsonEncode(data);
+    try {
+      final response = await http
+          .put(Uri.parse(url), headers: header, body: jsonString)
+          .timeout(const Duration(seconds: 60));
+      responseJson = returnResponce(response);
+    } on SocketException {
+      throw InternetException('');
+    } on RequestTimeOut {
+      throw RequestTimeOut("");
+    }
+    if (kDebugMode) {
+      print(responseJson);
+    }
+    return responseJson;
+  }
+
   // handling responce
   dynamic returnResponce(http.Response response) {
     switch (response.statusCode) {

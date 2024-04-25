@@ -77,7 +77,7 @@ class _InterestScreenState extends State<InterestScreen> {
                     children: chipValues.map((String value) {
                       return Container(
                           padding: const EdgeInsets.all(5),
-                          margin: EdgeInsets.all(6),
+                          margin: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
                               color: ColorPallet.commonColor.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(6)),

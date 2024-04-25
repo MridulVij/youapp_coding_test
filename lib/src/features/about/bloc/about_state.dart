@@ -4,8 +4,9 @@ class AboutState {}
 
 final class AboutInitial extends AboutState {}
 
-final class EditAboutButtonClickState extends AboutState {}
+final class AboutLoadingStateAfterClickingSaveAndEditButton
+    extends AboutState {}
 
-final class EditInterestButtonClickState extends AboutState {}
+final class AboutSuccessState extends AboutState {}
 
-final class EditInterestButtonClickStateSaved extends AboutState {}
+final class AboutFailureState extends AboutState {}

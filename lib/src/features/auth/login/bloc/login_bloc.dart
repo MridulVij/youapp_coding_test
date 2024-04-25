@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:youapp_coding_test/src/core/responses/status.dart';
 import '../../../../config/assets/api_assets.dart';
 import '../../../../core/error/app_exception.dart';
@@ -22,8 +23,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         }, ApiAssets.baseApi + '/api/login');
         print('Response is: $response');
         Map<String, dynamic> responseMap = response;
+        SharedPreferences sp = await SharedPreferences.getInstance();
         print(responseMap['message']);
         if (responseMap['message'] == "User has been logged in successfully") {
+          sp.setString('token', responseMap['access_token']);
           emit(LoginSuccessState());
         }
       } on SocketException {

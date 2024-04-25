@@ -8,9 +8,19 @@ class SaveAndUpdateButtonClicked extends AboutEvent {
   final String birthday;
   final String horoscope;
   final String zodiac;
-  final String height;
-  final String weight;
+  final int height;
+  final int weight;
 
-  SaveAndUpdateButtonClicked(this.displayName, this.gender, this.birthday,
-      this.horoscope, this.zodiac, this.height, this.weight);
+  SaveAndUpdateButtonClicked(
+      {required this.displayName,
+      required this.gender,
+      required this.birthday,
+      required this.horoscope,
+      required this.zodiac,
+      required this.height,
+      required this.weight});
+}
+
+class AboutEmptyEditButtonClicked extends AboutEvent {
+  //
 }

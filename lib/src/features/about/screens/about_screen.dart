@@ -123,40 +123,49 @@ class _AboutScreenState extends State<AboutScreen> {
               SizedBox(
                 height: 0.03.sh,
               ),
-              isAboutShow
-                  ? CustomAboutFieldEmpty(
-                      description:
-                          'Add in your your to help others know you\nbetter',
-                      onClick: () {
-                        setState(() {
-                          isAboutShow = !isAboutShow;
-                        });
-                      },
+              BlocConsumer<AboutBloc, AboutState>(
+                listener: (context, state) {
+                  // TODO: implement listener
+                },
+                builder: (context, state) {
+                  if (state
+                      is AboutLoadingStateAfterClickingSaveAndEditButton) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (state is ShowCustomAboutFieldNotEmpty) {
+                    return CustomAboutFieldNotEmpty(
+                      image: image,
+                      selectImage: selectImage,
+                      // onClick: () {
+                      //   //
+                      // },
                       title: 'About',
-                    )
-                  : BlocConsumer<AboutBloc, AboutState>(
-                      listener: (context, state) {
-                        // TODO: implement listener
-                      },
-                      builder: (context, state) {
-                        if (state
-                            is AboutLoadingStateAfterClickingSaveAndEditButton) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                        return CustomAboutFieldNotEmpty(
-                          image: image,
-                          selectImage: selectImage,
-                          onClick: () {
-                            setState(() {
-                              isAboutShow = !isAboutShow;
-                            });
-                          },
-                          title: 'About',
-                        );
-                      },
-                    ),
+                    );
+                  }
+
+                  if (state is AboutSuccessState) {
+                    return CustomAboutFieldFilled(
+                      description: 'Success',
+                      title: 'Interest',
+                      onClick: () {},
+                    );
+                  }
+                  // if (state is AboutInitial) {
+                  // return
+
+                  return CustomAboutFieldEmpty(
+                    description:
+                        'Add in your your to help others know you\nbetter',
+                    onClick: () {
+                      aboutBloc.add(AboutEmptyEditButtonClicked());
+                    },
+                    title: 'About',
+                  );
+                  // }
+                },
+              ),
               //
               SizedBox(
                 height: 0.02.sh,

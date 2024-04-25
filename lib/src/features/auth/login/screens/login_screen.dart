@@ -84,7 +84,7 @@ class LoginScreen extends StatelessWidget {
               if (state is LoginSuccessState) {
                 print('Api Fetched Successfullly!');
                 Duration(seconds: 3);
-                Navigator.pushNamed(context, RouteNames.home);
+                Navigator.pushNamed(context, RouteNames.about);
               }
               if (state is LoginSuccessState) {
                 CustomSnackbar.show(

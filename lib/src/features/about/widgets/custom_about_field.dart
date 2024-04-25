@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../common/common_text.dart';
@@ -9,6 +10,7 @@ import '../../../config/themes/color_pallet.dart';
 import '../../../config/assets/svg_assets.dart';
 import '../../../config/utils/image_picker.dart';
 import '../../auth/register/widgets/golden_gradient.dart';
+import '../bloc/about_bloc.dart';
 import 'custom_dropdown.dart';
 import 'custom_textfieldbox.dart';
 
@@ -79,15 +81,82 @@ class CustomAboutFieldEmpty extends StatelessWidget {
 }
 
 //
-class CustomAboutFieldNotEmpty extends StatefulWidget {
+class CustomAboutFieldFilled extends StatelessWidget {
   final String title;
   final VoidCallback onClick;
+  final String description;
+  const CustomAboutFieldFilled(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.onClick});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: Duration(seconds: 3),
+      height: 0.120.sh,
+      padding: EdgeInsets.symmetric(horizontal: 0.025.sh, vertical: 0.01.sh),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: ColorPallet.emptyContainerColor1,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CommonText(
+                text: title,
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: ColorPallet.commonColor,
+              ),
+              InkWell(
+                onTap: onClick,
+                child: SvgPicture.asset(SvgAssets.editLogo),
+              )
+              // InkWell(
+              //   onTap: () {},
+              //   child: GoldenGradient(
+              //     child: CommonText(
+              //       text: 'Save & Update',
+              //       fontSize: 12,
+              //       fontWeight: FontWeight.w500,
+              //       color: ColorPallet.commonColor,
+              //     ),
+              //   ),
+              // )
+            ],
+          ),
+          SizedBox(
+            height: 0.02.sh,
+          ),
+          CommonText(
+            text: description,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: ColorPallet.commonColor.withOpacity(0.5),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+//
+class CustomAboutFieldNotEmpty extends StatefulWidget {
+  final String title;
+  // final VoidCallback onClick;
   final File? image;
   final VoidCallback selectImage;
   const CustomAboutFieldNotEmpty(
       {super.key,
       required this.title,
-      required this.onClick,
+      // required this.onClick,
       required this.image,
       required this.selectImage});
 
@@ -97,8 +166,17 @@ class CustomAboutFieldNotEmpty extends StatefulWidget {
 }
 
 class _CustomAboutFieldNotEmptyState extends State<CustomAboutFieldNotEmpty> {
+  final TextEditingController name = TextEditingController();
+  final TextEditingController gender = TextEditingController();
+  final TextEditingController birthday = TextEditingController();
+  final TextEditingController horoscope = TextEditingController();
+  final TextEditingController zodiac = TextEditingController();
+  final TextEditingController height = TextEditingController();
+  final TextEditingController weight = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final aboutBloc = BlocProvider.of<AboutBloc>(context);
     return AnimatedContainer(
       duration: Duration(seconds: 3),
       // height: 0.3.sh,
@@ -126,7 +204,16 @@ class _CustomAboutFieldNotEmptyState extends State<CustomAboutFieldNotEmpty> {
               //   child: SvgPicture.asset(SvgAssets.editLogo),
               // )
               InkWell(
-                onTap: widget.onClick,
+                onTap: () {
+                  aboutBloc.add(SaveAndUpdateButtonClicked(
+                      displayName: name.text,
+                      birthday: birthday.text,
+                      gender: gender.text,
+                      height: int.tryParse(height.text) ?? 0,
+                      horoscope: horoscope.text,
+                      weight: int.tryParse(weight.text) ?? 0,
+                      zodiac: zodiac.text));
+                },
                 child: GoldenGradient(
                   child: CommonText(
                     text: 'Save & Update',
@@ -197,34 +284,34 @@ class _CustomAboutFieldNotEmptyState extends State<CustomAboutFieldNotEmpty> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextFieldBox(
-                    controller: TextEditingController(),
+                    controller: name,
                     hintText: 'Enter name',
                   ),
                   SizedBox(height: 0.01.sh),
                   CustomDropDownOption(),
                   SizedBox(height: 0.01.sh),
                   CustomTextFieldBox(
-                    controller: TextEditingController(),
+                    controller: birthday,
                     hintText: 'DD MM YYYY',
                   ),
                   SizedBox(height: 0.01.sh),
                   CustomTextFieldBox(
-                    controller: TextEditingController(),
+                    controller: horoscope,
                     hintText: '--',
                   ),
                   SizedBox(height: 0.01.sh),
                   CustomTextFieldBox(
-                    controller: TextEditingController(),
+                    controller: zodiac,
                     hintText: '--',
                   ),
                   SizedBox(height: 0.01.sh),
                   CustomTextFieldBox(
-                    controller: TextEditingController(),
+                    controller: height,
                     hintText: 'Add height',
                   ),
                   SizedBox(height: 0.01.sh),
                   CustomTextFieldBox(
-                    controller: TextEditingController(),
+                    controller: weight,
                     hintText: 'Add weight',
                   ),
                 ],

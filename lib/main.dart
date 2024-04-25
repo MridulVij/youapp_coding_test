@@ -37,9 +37,9 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'YouApp Coding Test App',
-            home: AboutScreen(),
-            // initialRoute: RouteNames.register,
-            // onGenerateRoute: Routes.generateRoute,
+            // home: AboutScreen(),
+            initialRoute: RouteNames.register,
+            onGenerateRoute: Routes.generateRoute,
           )),
     );
   }

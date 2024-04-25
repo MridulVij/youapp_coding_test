@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:youapp_coding_test/src/features/about/bloc/about_bloc.dart';
 import 'package:youapp_coding_test/src/features/auth/login/bloc/login_bloc.dart';
 import 'package:youapp_coding_test/src/features/auth/register/bloc/register_bloc.dart';
 import 'src/features/about/screens/about_screen.dart';
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider<RegisterBloc>(
               create: (context) => RegisterBloc(),
+            ),
+            BlocProvider<AboutBloc>(
+              create: (context) => AboutBloc(),
             ),
           ],
           child: MaterialApp(

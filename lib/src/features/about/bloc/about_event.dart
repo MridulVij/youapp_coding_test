@@ -1,4 +1,9 @@
 part of 'about_bloc.dart';
 
-@immutable
-sealed class AboutEvent {}
+class AboutEvent {}
+
+class EditAboutButtonClicked extends AboutEvent {}
+
+class EditInterestButtonClicked extends AboutEvent {}
+
+class SaveAndUpdateButtonClicked extends AboutEvent {}

@@ -4,7 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youapp_coding_test/src/features/about/bloc/about_bloc.dart';
 import 'package:youapp_coding_test/src/features/auth/login/bloc/login_bloc.dart';
 import 'package:youapp_coding_test/src/features/auth/register/bloc/register_bloc.dart';
+import 'src/config/routes/route_names.dart';
+import 'src/config/routes/routes.dart';
 import 'src/features/about/screens/about_screen.dart';
+import 'src/features/interest/screens/interest_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'YouApp Coding Test App',
-            home: AboutScreen(),
+            home: InterestScreen(),
             // initialRoute: RouteNames.register,
             // onGenerateRoute: Routes.generateRoute,
           )),

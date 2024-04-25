@@ -5,6 +5,7 @@ import 'package:youapp_coding_test/src/features/auth/register/screens/register_s
 import 'package:youapp_coding_test/src/features/about/screens/about_screen.dart';
 
 import '../../features/home/home_screen.dart';
+import '../../features/interest/screens/interest_screen.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -31,7 +32,9 @@ class Routes {
           case RouteNames.about:
             return AboutScreen();
           case RouteNames.about:
+            return AboutScreen();
           case RouteNames.interest:
+            return InterestScreen();
           case RouteNames.home:
             return HomeScreen();
           default:

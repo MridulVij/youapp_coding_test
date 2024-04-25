@@ -82,8 +82,14 @@ class CustomAboutFieldEmpty extends StatelessWidget {
 class CustomAboutFieldNotEmpty extends StatefulWidget {
   final String title;
   final VoidCallback onClick;
+  final File? image;
+  final VoidCallback selectImage;
   const CustomAboutFieldNotEmpty(
-      {super.key, required this.title, required this.onClick});
+      {super.key,
+      required this.title,
+      required this.onClick,
+      required this.image,
+      required this.selectImage});
 
   @override
   State<CustomAboutFieldNotEmpty> createState() =>
@@ -91,18 +97,6 @@ class CustomAboutFieldNotEmpty extends StatefulWidget {
 }
 
 class _CustomAboutFieldNotEmptyState extends State<CustomAboutFieldNotEmpty> {
-  File? image;
-
-  void selectImage() async {
-    print('tapped');
-    final pickedImage = await pickImage();
-    if (pickedImage != null) {
-      setState(() {
-        image = pickedImage;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -145,13 +139,13 @@ class _CustomAboutFieldNotEmptyState extends State<CustomAboutFieldNotEmpty> {
             ],
           ),
           SizedBox(height: 0.02.sh),
-          InkWell(
-            onTap: selectImage,
-            child: ClipRRect(
+          IconButton(
+            onPressed: widget.selectImage,
+            icon: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: image != null
+              child: widget.image != null
                   ? Image.file(
-                      image!,
+                      widget.image!,
                       height: 60,
                       width: 60,
                       fit: BoxFit.cover,

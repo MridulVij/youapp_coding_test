@@ -3,10 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:youapp_coding_test/src/config/routes/route_names.dart';
 import 'package:youapp_coding_test/src/config/themes/color_pallet.dart';
 import 'package:youapp_coding_test/src/config/assets/svg_assets.dart';
 import '../../../common/common_appbar.dart';
 import '../../../common/common_text.dart';
+import '../../../config/utils/image_picker.dart';
 import '../bloc/about_bloc.dart';
 import '../widgets/custom_about_field.dart';
 import '../widgets/custom_chip.dart';
@@ -21,9 +23,18 @@ class AboutScreen extends StatefulWidget {
 class _AboutScreenState extends State<AboutScreen> {
   String name = 'Jhondoe';
 
+  bool isAboutShow = false;
   File? image;
 
-  bool isAboutShow = false;
+  void selectImage() async {
+    print('tapped');
+    final pickedImage = await pickImage();
+    if (pickedImage != null) {
+      setState(() {
+        image = pickedImage;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +59,17 @@ class _AboutScreenState extends State<AboutScreen> {
                 children: [
                   Container(
                     height: 0.210.sh,
+                    width: double.maxFinite,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: image != null
-                          ? Image.file(image!)
+                          ? Image.file(
+                              image!,
+                              fit: BoxFit.fill,
+                            )
                           : Container(
                               height: 0.210.sh,
                               decoration: BoxDecoration(
@@ -110,7 +125,8 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               isAboutShow
                   ? CustomAboutFieldEmpty(
-                      description: '',
+                      description:
+                          'Add in your your to help others know you\nbetter',
                       onClick: () {
                         setState(() {
                           isAboutShow = !isAboutShow;
@@ -119,6 +135,8 @@ class _AboutScreenState extends State<AboutScreen> {
                       title: 'About',
                     )
                   : CustomAboutFieldNotEmpty(
+                      image: image,
+                      selectImage: selectImage,
                       onClick: () {
                         setState(() {
                           isAboutShow = !isAboutShow;
@@ -130,7 +148,9 @@ class _AboutScreenState extends State<AboutScreen> {
                 height: 0.02.sh,
               ),
               CustomAboutFieldEmpty(
-                onClick: () {},
+                onClick: () {
+                  Navigator.pushNamed(context, RouteNames.interest);
+                },
                 description: 'Add in your interest to find a better match',
                 title: 'Interest',
               )

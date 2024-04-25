@@ -209,10 +209,11 @@ class _CustomAboutFieldNotEmptyState extends State<CustomAboutFieldNotEmpty> {
                       displayName: name.text,
                       birthday: birthday.text,
                       gender: gender.text,
-                      height: int.tryParse(height.text) ?? 0,
-                      horoscope: horoscope.text,
-                      weight: int.tryParse(weight.text) ?? 0,
-                      zodiac: zodiac.text));
+                      height: 0,
+                      // horoscope: horoscope.text,
+                      weight: 0
+                      // zodiac: zodiac.text
+                      ));
                 },
                 child: GoldenGradient(
                   child: CommonText(

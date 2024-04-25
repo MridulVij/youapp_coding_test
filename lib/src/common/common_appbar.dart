@@ -4,7 +4,7 @@ import 'common_text.dart';
 
 class CommonAppBar extends StatelessWidget {
   final IconData? leftIcon;
-  final IconData? rightIcon;
+  final Widget? rightIcon;
   final String? title;
   final IconData? nextRightButton;
   final IconData? previousLeftButton;
@@ -81,10 +81,7 @@ class CommonAppBar extends StatelessWidget {
         ),
         IconButton(
           onPressed: rightIconClick,
-          icon: Icon(
-            rightIcon,
-            color: iconColor,
-          ),
+          icon: rightIcon!,
         )
       ],
     );

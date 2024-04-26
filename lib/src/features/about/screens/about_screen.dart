@@ -146,9 +146,15 @@ class _AboutScreenState extends State<AboutScreen> {
                   }
 
                   if (state is AboutSuccessState) {
+                    final response = state.data;
                     return CustomAboutFieldFilled(
-                      description: 'Success',
-                      title: 'Interest',
+                      // description: state.data.name!,
+                      birthday: response.birthday!,
+                      title: "About",
+                      horoscope: response.horoscope!,
+                      height: response.height!,
+                      weight: response.weight!,
+                      zodiac: 'Pig',
                       onClick: () {},
                     );
                   }

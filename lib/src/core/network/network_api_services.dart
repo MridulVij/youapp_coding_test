@@ -61,7 +61,7 @@ class NetworkApiServices extends BaseApiServices {
   }
 
   // put api
-  Future<dynamic> postHeaderApi(
+  Future<dynamic> putHeaderApi(
       {required Map<String, String>? header,
       required Object? data,
       required String url}) async {
@@ -73,7 +73,7 @@ class NetworkApiServices extends BaseApiServices {
     final String jsonString = jsonEncode(data);
     try {
       final response = await http
-          .post(Uri.parse(url), headers: header, body: jsonString)
+          .put(Uri.parse(url), headers: header, body: jsonString)
           .timeout(const Duration(seconds: 60));
       responseJson = returnResponce(response);
     } on SocketException {

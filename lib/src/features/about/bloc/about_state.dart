@@ -9,6 +9,11 @@ final class AboutLoadingStateAfterClickingSaveAndEditButton
 
 final class ShowCustomAboutFieldNotEmpty extends AboutState {}
 
-final class AboutSuccessState extends AboutState {}
+final class AboutSuccessState extends AboutState {
+  final Data data;
+  AboutSuccessState(this.data);
+  @override
+  List<Object> get props => [data];
+}
 
 final class AboutFailureState extends AboutState {}

@@ -18,7 +18,7 @@ class AboutBloc extends Bloc<AboutEvent, AboutState> {
           SharedPreferences sp = await SharedPreferences.getInstance();
           String? token = sp.getString('token');
           print('${event.displayName}');
-          final response = await NetworkApiServices().postHeaderApi(header: {
+          final response = await NetworkApiServices().putHeaderApi(header: {
             "x-access-token": token.toString()
           }, data: {
             'name': event.displayName,
@@ -26,14 +26,15 @@ class AboutBloc extends Bloc<AboutEvent, AboutState> {
             'height': event.height,
             'weight': event.weight,
             'interests': ['jhg', 'jk', 'jm']
-          }, url: ApiAssets.baseApi + '/api/createProfile');
+          }, url: ApiAssets.baseApi + '/api/updateProfile');
           print('Response is: $response');
           Map<String, dynamic> responseMap = response;
           print(responseMap['message']);
           if (responseMap['message'] ==
-              "Profile has been created successfully") {
-            UserProfileDataModel.fromJson(response);
-            emit(AboutSuccessState());
+              "Profile has been updated successfully") {
+            // UserProfileDataModel.fromJson(responseMap['message']);
+            Data data = Data.fromJson(responseMap['data']);
+            emit(AboutSuccessState(data));
           } else {
             emit(AboutFailureState());
           }

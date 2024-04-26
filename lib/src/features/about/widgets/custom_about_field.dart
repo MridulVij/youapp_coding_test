@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:youapp_coding_test/src/models/user_profile_data_model.dart';
 import '../../../common/common_text.dart';
 import '../../../common/common_textfield.dart';
 import '../../../config/themes/color_pallet.dart';
@@ -80,21 +81,36 @@ class CustomAboutFieldEmpty extends StatelessWidget {
 }
 
 //
-class CustomAboutFieldFilled extends StatelessWidget {
+class CustomAboutFieldFilled extends StatefulWidget {
   final String title;
   final VoidCallback onClick;
-  final String description;
+  // final String description;
+  final String birthday;
+  final String horoscope;
+  final String zodiac;
+  final int height;
+  final int weight;
   const CustomAboutFieldFilled(
       {super.key,
       required this.title,
-      required this.description,
-      required this.onClick});
+      // required this.description,
+      required this.onClick,
+      required this.birthday,
+      required this.horoscope,
+      required this.zodiac,
+      required this.height,
+      required this.weight});
 
+  @override
+  State<CustomAboutFieldFilled> createState() => _CustomAboutFieldFilledState();
+}
+
+class _CustomAboutFieldFilledState extends State<CustomAboutFieldFilled> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: Duration(seconds: 3),
-      height: 0.120.sh,
+      // height: 0.220.sh,
       padding: EdgeInsets.symmetric(horizontal: 0.025.sh, vertical: 0.01.sh),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
@@ -109,13 +125,13 @@ class CustomAboutFieldFilled extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CommonText(
-                text: title,
+                text: widget.title,
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
                 color: ColorPallet.commonColor,
               ),
               InkWell(
-                onTap: onClick,
+                onTap: widget.onClick,
                 child: SvgPicture.asset(SvgAssets.editLogo),
               )
               // InkWell(
@@ -135,7 +151,31 @@ class CustomAboutFieldFilled extends StatelessWidget {
             height: 0.02.sh,
           ),
           CommonText(
-            text: description,
+            text: widget.birthday,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: ColorPallet.commonColor.withOpacity(0.5),
+          ),
+          CommonText(
+            text: widget.horoscope,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: ColorPallet.commonColor.withOpacity(0.5),
+          ),
+          CommonText(
+            text: widget.zodiac,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: ColorPallet.commonColor.withOpacity(0.5),
+          ),
+          CommonText(
+            text: widget.height.toString(),
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: ColorPallet.commonColor.withOpacity(0.5),
+          ),
+          CommonText(
+            text: widget.weight.toString(),
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: ColorPallet.commonColor.withOpacity(0.5),

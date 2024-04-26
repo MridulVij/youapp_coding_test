@@ -148,7 +148,7 @@ class _CustomAboutFieldFilledState extends State<CustomAboutFieldFilled> {
             ],
           ),
           SizedBox(
-            height: 0.02.sh,
+            height: 0.01.sh,
           ),
           CommonText(
             text: widget.birthday,

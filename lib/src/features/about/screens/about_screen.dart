@@ -21,6 +21,13 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  // For Fetching the Get Api to update About Section and to avoid taking details from user,
+  // }
+
   String name = 'Jhondoe';
 
   bool isAboutShow = true;
@@ -48,9 +55,19 @@ class _AboutScreenState extends State<AboutScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CommonAppBar(
-                title: '@${name}',
-              ),
+              BlocConsumer<AboutBloc, AboutState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    if (state is AboutSuccessState) {
+                      return CommonAppBar(
+                        title: '@${state.data.name}',
+                      );
+                    }
+                    return CommonAppBar(
+                      title: '@${name}',
+                    );
+                  }),
+
               SizedBox(
                 height: 0.01.sh,
               ),
@@ -85,12 +102,24 @@ class _AboutScreenState extends State<AboutScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CommonText(
-                          text: '@${name},',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: ColorPallet.commonColor,
-                        ),
+                        BlocConsumer<AboutBloc, AboutState>(
+                            listener: (context, state) {},
+                            builder: (context, state) {
+                              if (state is AboutSuccessState) {
+                                return CommonText(
+                                  text: '@${state.data.name},',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: ColorPallet.commonColor,
+                                );
+                              }
+                              return CommonText(
+                                text: '@${name},',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: ColorPallet.commonColor,
+                              );
+                            }),
                         CommonText(
                           text: 'Male',
                           fontSize: 13,

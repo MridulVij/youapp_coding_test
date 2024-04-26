@@ -84,7 +84,9 @@ class CommonAppBar extends StatelessWidget {
                 onPressed: rightIconClick,
                 icon: rightIcon!,
               )
-            : const SizedBox()
+            : SizedBox(
+                width: 10,
+              )
       ],
     );
   }

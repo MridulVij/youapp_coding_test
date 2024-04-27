@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youapp_coding_test/src/common/common_appbar.dart';
 import 'package:youapp_coding_test/src/common/common_scaffold_background.dart';
 import 'package:youapp_coding_test/src/common/common_text.dart';
 import 'package:youapp_coding_test/src/config/themes/color_pallet.dart';
 import 'package:youapp_coding_test/src/features/auth/register/widgets/golden_gradient.dart';
+import 'package:youapp_coding_test/src/features/interest/bloc/interest_bloc.dart';
 
 import '../widgets/blue_gradient.dart';
 
@@ -22,6 +24,7 @@ class _InterestScreenState extends State<InterestScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final interestBloc = BlocProvider.of<InterestBloc>(context);
     return Scaffold(
       body: CommonScaffoldBackground(
         widget: Column(
@@ -30,6 +33,9 @@ class _InterestScreenState extends State<InterestScreen> {
             CommonAppBar(
               rightIconClick: () {
                 print('tapped');
+                interestBloc
+                    .add(InterestSaveButtonClicked(interests: chipValues));
+                Navigator.pop(context);
               },
               rightIcon: BlueGradient(
                 child: CommonText(
@@ -121,6 +127,8 @@ class _InterestScreenState extends State<InterestScreen> {
                           setState(() {
                             chipValues.add(value);
                             textEditingController.clear();
+                            //
+                            // interestBloc.add();
                           });
                         }
                       },

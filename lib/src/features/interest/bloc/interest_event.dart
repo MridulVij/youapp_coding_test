@@ -1,4 +1,8 @@
 part of 'interest_bloc.dart';
 
-@immutable
-sealed class InterestEvent {}
+class InterestEvent {}
+
+final class InterestSaveButtonClicked extends InterestEvent {
+  List<String>? interests;
+  InterestSaveButtonClicked({required this.interests});
+}

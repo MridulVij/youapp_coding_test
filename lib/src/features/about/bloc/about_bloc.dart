@@ -25,7 +25,7 @@ class AboutBloc extends Bloc<AboutEvent, AboutState> {
             'birthday': event.birthday,
             'height': event.height,
             'weight': event.weight,
-            'interests': ['jhg', 'jk', 'jm']
+            'interests': [],
           }, url: ApiAssets.baseApi + '/api/updateProfile');
           print('Response is: $response');
           Map<String, dynamic> responseMap = response;
